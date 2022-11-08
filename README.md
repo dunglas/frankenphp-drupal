@@ -11,6 +11,12 @@ cd frankenphp-drupal
 docker compose pull --include-deps
 docker compose up
 ```
-Your Drupal is available on `https://localhost`.
-Check `docker-compose.yml` to find DB credentials.
-The DB hostname is `postgres`.
+
+Drupal is available on `https://localhost`.
+
+During initial Drupal setup:
+* Database type: `PostgreSQL`
+* Database name: `postgres`
+* Database username: `postgres`
+* Database password: `example` (change it in `docker-compose.yml`)
+* ADVANCED OPTIONS; Database host: `postgres`
