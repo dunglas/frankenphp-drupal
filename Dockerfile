@@ -9,7 +9,7 @@ RUN install-php-extensions \
 
 COPY --from=drupal /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
 
-COPY --from=composer:2 /usr/bin/composer /usr/local/bin/
+COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 
 # https://www.drupal.org/node/3060/release
 ENV DRUPAL_VERSION 9.5.0-beta2
