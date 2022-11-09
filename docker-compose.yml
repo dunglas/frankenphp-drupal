@@ -29,7 +29,9 @@ services:
     restart: always
 
   postgres:
-    image: postgres
+    build:
+      context: .
+      dockerfile: db.Dockerfile
     environment:
       POSTGRES_PASSWORD: example
     restart: always
