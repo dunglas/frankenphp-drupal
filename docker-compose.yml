@@ -13,8 +13,10 @@ version: '3.1'
 
 services:
 
-  drupal:
+  app:
+    container_name: app
     build: .
+    image: frankenphp-drupal/app
     volumes:
       - /app/public/modules
       - /app/public/profiles
@@ -38,7 +40,13 @@ services:
       - stonehenge-network
 
   postgres:
-    image: postgres
+    container_name: db
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    image: frankenphp-drupal/postgres
+    volumes:
+      - /var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: example
     restart: always
