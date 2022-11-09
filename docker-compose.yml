@@ -15,9 +15,6 @@ services:
 
   drupal:
     build: .
-    ports:
-      - 80:80
-      - 443:443
     volumes:
       - /app/public/modules
       - /app/public/profiles
@@ -27,9 +24,27 @@ services:
       # existing content of the image at the same location
       - /app/public/sites
     restart: always
+    environment:
+      SERVER_NAME: :80
+    labels:
+      traefik.enable: true
+      traefik.http.routers.frankenphp-drupal.entrypoints: https
+      traefik.http.routers.frankenphp-drupal.rule: Host(`frankenphp-drupal.docker.so`)
+      traefik.http.routers.frankenphp-drupal.tls: true
+      traefik.http.services.frankenphp-drupal.loadbalancer.server.port: 80
+      traefik.docker.network: stonehenge-network
+    networks:
+      - default
+      - stonehenge-network
 
   postgres:
     image: postgres
     environment:
       POSTGRES_PASSWORD: example
     restart: always
+    networks:
+      - default
+
+networks:
+  stonehenge-network:
+    external: true
