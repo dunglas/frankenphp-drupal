@@ -1,0 +1,69 @@
+{
+    "name": "dunglas/frankenphp-drupal",
+    "description": "Drupal 10 with FrankenPHP",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/dunglas/frankenphp-drupal",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "composer-runtime-api": "^2",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/core-composer-scaffold": "^10.0",
+        "drupal/core-recommended": "^10.0",
+        "oomphinc/composer-installers-extender": "^2.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "oomphinc/composer-installers-extender": true
+        }
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "drupal/core"
+            ],
+            "locations": {
+                "web-root": "./public"
+            },
+            "file-mapping": {
+                "[project-root]/.editorconfig": false
+            }
+        },
+        "enable-patching": true,
+        "installer-types": ["bower-asset", "npm-asset"],
+        "installer-paths": {
+            "public/core": ["type:drupal-core"],
+            "public/libraries/{$name}": ["type:drupal-library", "type:bower-asset", "type:npm-asset"],
+            "public/modules/contrib/{$name}": ["type:drupal-module"],
+            "public/modules/custom/{$name}": ["type:drupal-module-custom"],
+            "public/profiles/{$name}": ["type:drupal-profile"],
+            "public/themes/contrib/{$name}": ["type:drupal-theme"],
+            "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
+            "drush/{$name}": ["type:drupal-drush"]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
