@@ -1,6 +1,7 @@
 FROM dunglas/frankenphp
 
 RUN install-php-extensions \
+    apcu \
     gd \
     opcache \
     pdo_mysql \
