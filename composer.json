@@ -13,7 +13,9 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-recommended": "^10.0",
-        "oomphinc/composer-installers-extender": "^2.0"
+        "el7cosmos/drupal-runtime": "*",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "runtime/frankenphp-symfony": "^0.1.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -25,16 +27,16 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true,
-            "oomphinc/composer-installers-extender": true
+            "oomphinc/composer-installers-extender": true,
+            "symfony/runtime": true
         }
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
         "drupal-scaffold": {
             "allowed-packages": [
-                "drupal/core"
+                "drupal/core",
+                "el7cosmos/drupal-runtime"
             ],
             "locations": {
                 "web-root": "./public"
@@ -54,6 +56,10 @@
             "public/themes/contrib/{$name}": ["type:drupal-theme"],
             "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
             "drush/{$name}": ["type:drupal-drush"]
+        },
+        "runtime": {
+            "autoload_template": "vendor/el7cosmos/drupal-runtime/assets/autoload_runtime.template",
+            "class": "Runtime\\FrankenPhpSymfony\\Runtime"
         }
     },
     "repositories": [

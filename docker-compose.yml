@@ -27,6 +27,7 @@ services:
       - /app/public/sites
     restart: always
     environment:
+      FRANKENPHP_CONFIG: "worker ./public/index.php"
       SERVER_NAME: :80
     labels:
       traefik.enable: true
