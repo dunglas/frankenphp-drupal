@@ -1,0 +1,61 @@
+{
+    "name": "dunglas/frankenphp-drupal",
+    "description": "Drupal 10 with FrankenPHP",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/dunglas/frankenphp-drupal",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "composer-runtime-api": "^2",
+        "composer/installers": "^2.0",
+        "drupal/core-composer-scaffold": "^10.0",
+        "drupal/core-recommended": "^10.0",
+        "el7cosmos/drupal-runtime": "*",
+        "runtime/frankenphp-symfony": "^0.1.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "symfony/runtime": true
+        }
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "drupal/core",
+                "el7cosmos/drupal-runtime"
+            ],
+            "locations": {
+                "web-root": "./web"
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library", "type:bower-asset", "type:npm-asset"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/modules/custom/{$name}": ["type:drupal-module-custom"],
+            "web/profiles/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/themes/custom/{$name}": ["type:drupal-theme-custom"],
+            "drush/{$name}": ["type:drupal-drush"]
+        },
+        "runtime": {
+            "autoload_template": "vendor/el7cosmos/drupal-runtime/assets/autoload_runtime.template",
+            "class": "Runtime\\FrankenPhpSymfony\\Runtime"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ]
+}

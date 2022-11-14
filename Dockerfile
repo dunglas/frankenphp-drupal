@@ -16,10 +16,13 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 ENV DRUPAL_VERSION 10.0.0-beta2
 
 WORKDIR /opt/drupal
+
+COPY composer.json .
+
 # Copy from the official image when Drupal 10.0 will be released
 RUN set -eux; \
 	export COMPOSER_HOME="$(mktemp -d)"; \
-	composer create-project --no-interaction "drupal/recommended-project:$DRUPAL_VERSION" ./; \
+	composer install --no-interaction --no-progress; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
 	ln -sf /opt/drupal/web /app/public; \
