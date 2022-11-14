@@ -8,7 +8,7 @@ the modern app server for PHP.
 ```
 git clone https://github.com/dunglas/frankenphp-drupal
 cd frankenphp-drupal
-docker compose pull --include-deps
+docker compose build --pull
 docker compose up
 ```
 
