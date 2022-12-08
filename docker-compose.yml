@@ -27,6 +27,8 @@ services:
       # existing content of the image at the same location
       - /app/public/sites
     restart: always
+    environment:
+      FRANKENPHP_CONFIG: "worker ./web/index.php"
 
   postgres:
     build:
