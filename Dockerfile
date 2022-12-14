@@ -19,7 +19,7 @@ WORKDIR /opt/drupal
 # Copy from the official image when Drupal 10.0 will be released
 RUN set -eux; \
 	export COMPOSER_HOME="$(mktemp -d)"; \
-	composer create-project --no-interaction "drupal/recommended-project:$DRUPAL_VERSION" ./; \
+	composer create-project --no-interaction --no-progress "drupal/recommended-project:$DRUPAL_VERSION" ./; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
 	ln -sf /opt/drupal/web /app/public; \
