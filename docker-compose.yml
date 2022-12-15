@@ -9,12 +9,21 @@
 # Database password: example
 # ADVANCED OPTIONS; Database host: postgres
 
-version: '3.1'
+version: '3.4'
 
 services:
-
   drupal:
-    build: .
+    build:
+      context: ./drupal
+      target: app_drupal
+      args: # arguments used at docker build time (used by Dockerfile)
+        # https://www.drupal.org/project/drupal/releases/10.0.0-beta2
+        DRUPAL_PROJECT: ${DRUPAL_PROJECT:-drupal/recommended-project}
+        DRUPAL_VERSION: ${DRUPAL_VERSION:-10.0.0-rc3}
+        DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-example}@postgres:5432/${POSTGRES_DB:-postgres}?serverVersion=${POSTGRES_VERSION:-14}
+        DRUPAL_ADMIN_PASSWORD: ${DRUPAL_ADMIN_PASSWORD:-admin}
+    depends_on:
+      - database
     ports:
       - 80:80
       - 443:443
@@ -28,10 +37,12 @@ services:
       - /app/public/sites
     restart: always
 
-  postgres:
+  database:
     build:
-      context: .
-      dockerfile: db.Dockerfile
+      context: ./drupal
+      target: app_database
+      args:
+        POSTGRES_VERSION: 14
     environment:
       POSTGRES_PASSWORD: example
     restart: always

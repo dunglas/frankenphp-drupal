@@ -1,0 +1,28 @@
+# Drupal with PostgreSQL
+#
+# Access via "https://localhost"
+#
+# During initial Drupal setup,
+# Database type: PostgreSQL
+# Database name: postgres
+# Database username: postgres
+# Database password: example
+# ADVANCED OPTIONS; Database host: postgres
+# the above will be addressed automatically with drush in docker entrypoint in future
+
+version: '3.1'
+
+services:
+  drupal:
+    ports:
+      - 80:80
+      - 443:443
+    # volumes:
+    #   - ./drupal:/opt/drupal
+    #   - /opt/drupal/vendor
+    restart: always
+
+  database:
+    environment:
+      POSTGRES_PASSWORD: example
+    restart: always

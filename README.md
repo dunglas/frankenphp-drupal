@@ -5,6 +5,16 @@ the modern app server for PHP.
 
 ## Getting Started
 
+### Fork (this repo) instructions
+```
+git clone https://github.com/CobraSphere/frankenphp-drupal
+cd frankenphp-drupal
+docker compose pull --include-deps
+docker compose up
+```
+
+### Original instructions
+
 ```
 git clone https://github.com/dunglas/frankenphp-drupal
 cd frankenphp-drupal
@@ -20,3 +30,4 @@ During initial Drupal setup:
 * Database username: `postgres`
 * Database password: `example` (change it in `docker-compose.yml`)
 * ADVANCED OPTIONS; Database host: `postgres`
+
