@@ -12,8 +12,8 @@ COPY --from=drupal /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
 
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 
-# https://www.drupal.org/project/drupal/releases/10.0.0-rc3
-ENV DRUPAL_VERSION 10.0.0-rc3
+# https://www.drupal.org/project/drupal/releases/10.0.0
+ENV DRUPAL_VERSION 10.0.0
 
 WORKDIR /opt/drupal
 # Copy from the official image when Drupal 10.0 will be released
