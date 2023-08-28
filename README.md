@@ -5,7 +5,7 @@ the modern app server for PHP.
 
 ## Getting Started
 
-```shell
+```console
 git clone https://github.com/dunglas/frankenphp-drupal
 cd frankenphp-drupal
 docker compose pull --include-deps
