@@ -3,7 +3,7 @@
 # Access via "https://localhost"
 #
 # During initial Drupal setup,
-# Database type: PostgresSQL
+# Database type: PostgreSQL
 # Database name: postgres
 # Database username: postgres
 # Database password: example
