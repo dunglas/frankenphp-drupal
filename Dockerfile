@@ -23,7 +23,7 @@ RUN set -eux; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
 	ln -sf /opt/drupal/web /app/public; \
-    sed -i'' 's/public/web/' /etc/Caddyfile; \
+    sed -i'' 's/public/web/' /etc/caddy/Caddyfile; \
     cp /opt/drupal/web/sites/default/default.settings.php /opt/drupal/web/sites/default/settings.php; \
 	# delete composer cache
 	rm -rf "$COMPOSER_HOME"
