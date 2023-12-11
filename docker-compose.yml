@@ -9,8 +9,6 @@
 # Database password: example
 # ADVANCED OPTIONS; Database host: postgres
 
-version: '3.1'
-
 services:
 
   drupal:
