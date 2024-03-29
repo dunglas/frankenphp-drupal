@@ -11,38 +11,38 @@
 	order php before file_server
 }
 
-{$CADDY_EXTRA_CONFIG}
+{$CADDY_EXTRA_CONFIG} 
 
 {$SERVER_NAME:localhost} {
 	root * web/
 	encode zstd br gzip
 
 	@hiddenFilesRegexp path_regexp (^|/)\.
-    error @hiddenFilesRegexp 403
+	error @hiddenFilesRegexp 403
 
-    @hiddenPhpFilesRegexp path_regexp \..*/.*\.php$
-    error @hiddenPhpFilesRegexp 403
+	@hiddenPhpFilesRegexp path_regexp \..*/.*\.php$
+	error @hiddenPhpFilesRegexp 403
 
-    @notFoundPhpFiles path_regexp /vendor/.*\.php$
-    error @notFoundPhpFiles 404
+	@notFoundPhpFiles path_regexp /vendor/.*\.php$
+	error @notFoundPhpFiles 404
 
-    @notFoundPhpFilesRegexp path_regexp ^/sites/[^/]+/files/.*\.php$
-    error @notFoundPhpFilesRegexp 404
+	@notFoundPhpFilesRegexp path_regexp ^/sites/[^/]+/files/.*\.php$
+	error @notFoundPhpFilesRegexp 404
 
-    @privateDirRegexp path_regexp ^/sites/.*/private/
-    error @privateDirRegexp 403
+	@privateDirRegexp path_regexp ^/sites/.*/private/
+	error @privateDirRegexp 403
 
-    @protectedFilesRegexp {
-        not path /.well-known*
-        path_regexp \.(engine|inc|install|make|module|profile|po|sh|.*sql|theme|twig|tpl(\.php)?|xtmpl|yml)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock)|web\.config|yarn\.lock|package\.json)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig|\.save)$
-    }
-    error @protectedFilesRegexp 403
+	@protectedFilesRegexp {
+		not path /.well-known*
+		path_regexp \.(engine|inc|install|make|module|profile|po|sh|.*sql|theme|twig|tpl(\.php)?|xtmpl|yml)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock)|web\.config|yarn\.lock|package\.json)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig|\.save)$
+	}
+	error @protectedFilesRegexp 403
 
-    @static {
+	@static {
 		file
 		path *.avif *.css *.eot *.gif *.gz *.ico *.jpg *.jpeg *.js *.otf *.pdf *.png *.svg *.ttf *.webp *.woff *.woff2
 	}
-	header @static Cache-Control "max-age=31536000,public,immutable"
+	header @static Cache-Control "max-age=31536000,public,immutable" 
 
 	{$CADDY_SERVER_EXTRA_DIRECTIVES}
 
