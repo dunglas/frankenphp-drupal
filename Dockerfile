@@ -25,7 +25,8 @@ RUN set -eux; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
 	ln -sf /opt/drupal/web /app/public; \
-    sed -i'' 's/public/web/' /etc/caddy/Caddyfile; \
-    cp /opt/drupal/web/sites/default/default.settings.php /opt/drupal/web/sites/default/settings.php
+	sed -i'' 's/public/web/' /etc/caddy/Caddyfile; \
+	echo "\$settings['trusted_host_patterns'] = ['^' . preg_quote(\$_SERVER['SERVER_NAME'] ?? 'localhost', '/') . '\$'];" >> /opt/drupal/web/sites/default/default.settings.php; \
+	cp /opt/drupal/web/sites/default/default.settings.php /opt/drupal/web/sites/default/settings.php
 
 ENV PATH=${PATH}:/opt/drupal/vendor/bin
