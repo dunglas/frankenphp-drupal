@@ -1,13 +1,14 @@
-# Drupal with MySQL / MariaDB
+# Drupal with MariaDB
 #
 # Access via "https://localhost"
 #
-# During initial Drupal setup,
-# Database type: MySQL / MariaDB
+# During initial Drupal setup, use the following database configuration:
+#
+# Database type: MySQL, MariaDB, Percona Server, or equivalent 
 # Database name: drupal
 # Database username: root
-# Database password: drupal
-# ADVANCED OPTIONS; Database host: mariadb
+# Database password: example
+# ADVANCED OPTIONS; Database host: db
 
 services:
 
@@ -26,10 +27,8 @@ services:
       - /app/public/sites
     restart: always
 
-  mariadb:
-    build:
-      context: .
-      dockerfile: mariadb.db.Dockerfile
+  db:
+    image: mariadb
     environment:
-      MARIADB_ROOT_PASSWORD: drupal
+      MARIADB_ROOT_PASSWORD: example
     restart: always
