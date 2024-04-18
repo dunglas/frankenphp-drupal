@@ -1,5 +1,10 @@
 FROM dunglas/frankenphp:1-php8.3
 
+# install mariadb client
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    mariadb-client \
+  && rm -rf /var/lib/apt/lists/*
+ 
 RUN install-php-extensions \
     apcu \
     gd \
