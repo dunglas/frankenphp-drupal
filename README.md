@@ -54,3 +54,4 @@ During initial Drupal setup, use the following database configuration:
 
 - [#3437187 Add Caddyfile configuration](https://www.drupal.org/project/drupal/issues/3437187)
 - [#2218651 [meta] Make Drupal compatible with persistent app servers like ReactPHP, PHP-PM, PHPFastCGI, FrankenPHP, Swoole](https://www.drupal.org/project/drupal/issues/2218651)
+- [#3611621 [meta] Use memory cache instead of property caches](https://www.drupal.org/project/drupal/issues/3611621)
