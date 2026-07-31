@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1-php8.3
+FROM dunglas/frankenphp:1-php8.4
 
 RUN install-php-extensions \
     apcu \
@@ -7,8 +7,8 @@ RUN install-php-extensions \
     pdo_mysql \
     zip
 
-COPY --from=drupal:php8.3 /opt/drupal /opt/drupal
-COPY --from=drupal:php8.3 /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
+COPY --from=drupal:php8.4 /opt/drupal /opt/drupal
+COPY --from=drupal:php8.4 /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
 
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 
@@ -20,12 +20,12 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 WORKDIR /opt/drupal
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY Caddyfile /etc/frankenphp/Caddyfile
 RUN set -eux; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
 	ln -sf /opt/drupal/web /app/public; \
-	echo "\$settings['trusted_host_patterns'] = ['^' . preg_quote(\$_SERVER['SERVER_NAME'] ?? 'localhost', '/') . '\$'];" >> /opt/drupal/web/sites/default/default.settings.php; \
+	echo "\$settings['trusted_host_patterns'] = ['^' . preg_quote(\$_SERVER['SERVER_NAME'] ?? 'localhost', '/') . '\$', '^.+\.orb\.local\$'];" >> /opt/drupal/web/sites/default/default.settings.php; \
 	cp /opt/drupal/web/sites/default/default.settings.php /opt/drupal/web/sites/default/settings.php
 
 ENV PATH=${PATH}:/opt/drupal/vendor/bin
