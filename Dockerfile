@@ -17,7 +17,7 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 # https://github.com/composer/composer/issues/11839
 # https://github.com/composer/composer/issues/11854
 # https://github.com/composer/composer/blob/94fe2945456df51e122a492b8d14ac4b54c1d2ce/src/Composer/Console/Application.php#L217-L218
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /opt/drupal
 COPY Caddyfile /etc/frankenphp/Caddyfile
