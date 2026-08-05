@@ -15,7 +15,7 @@ services:
   drupal:
     build: .
     environment:
-      SERVER_NAME: "localhost drupal.frankenphp-drupal.orb.local"
+      SERVER_NAME: "localhost"
     ports:
       - "80:80"
       - "443:443"
