@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1-php8.3
+FROM dunglas/frankenphp:1-php8.4
 
 RUN install-php-extensions \
     apcu \
@@ -7,8 +7,8 @@ RUN install-php-extensions \
     pdo_mysql \
     zip
 
-COPY --from=drupal:php8.3 /opt/drupal /opt/drupal
-COPY --from=drupal:php8.3 /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
+COPY --from=drupal:php8.4 /opt/drupal /opt/drupal
+COPY --from=drupal:php8.4 /usr/local/etc/php/conf.d/* /usr/local/etc/php/conf.d/
 
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 
@@ -17,10 +17,10 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/
 # https://github.com/composer/composer/issues/11839
 # https://github.com/composer/composer/issues/11854
 # https://github.com/composer/composer/blob/94fe2945456df51e122a492b8d14ac4b54c1d2ce/src/Composer/Console/Application.php#L217-L218
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /opt/drupal
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY Caddyfile /etc/frankenphp/Caddyfile
 RUN set -eux; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
 	rm -rf /app/public; \
